@@ -20,6 +20,12 @@
     cursor: pointer;
   }
 
+  #filters a {
+    color: black;
+    text-decoration: none;
+    opacity: 0.7;
+  }
+
   .filter p {
     font-size: 0.8rem;
   }
@@ -41,72 +47,94 @@
 </style>
 
 <div id="filters">
-  <div class="filter">
-    <div>
-      <i class="fa-solid fa-fire"></i>
+  <a href="/listings?category=trending">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-fire"></i>
+      </div>
+      <p>Trending</p>
     </div>
-    <p>Trending</p>
-  </div>
-  <div class="filter">
-    <div>
-      <i class="fa-solid fa-bed"></i>
+  </a>
+  <a href="/listings?category=rooms">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-bed"></i>
+      </div>
+      <p>Rooms</p>
     </div>
-    <p>Rooms</p>
-  </div>
-  <div class="filter">
-    <div>
-      <i class="fa-solid fa-mountain-city"></i>
+  </a>
+  <a href="/listings?category=iconic cities">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-mountain-city"></i>
+      </div>
+      <p>Iconic Cities</p>
     </div>
-    <p>Iconic Cities</p>
-  </div>
-  <div class="filter">
-    <div>
-      <i class="fa-solid fa-mountain"></i>
+  </a>
+  <a href="/listings?category=mountains">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-mountain"></i>
+      </div>
+      <p>Mountains</p>
     </div>
-    <p>Mountains</p>
-  </div>
-  <div class="filter">
-    <div>
-      <i class="fa-solid fa-school-flag"></i>
+  </a>
+  <a href="/listings?category=castles">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-school-flag"></i>
+      </div>
+      <p>Castles</p>
     </div>
-    <p>Castles</p>
-  </div>
-  <div class="filter">
-    <div>
-      <i class="fa-solid fa-person-swimming"></i>
+  </a>
+  <a href="/listings?category=amazing pools">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-person-swimming"></i>
+      </div>
+      <p>Amazing Pools</p>
     </div>
-    <p>Amazing Pools</p>
-  </div>
-  <div class="filter">
-    <div>
-      <i class="fa-solid fa-campground"></i>
+  </a>
+  <a href="/listings?category=camping">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-campground"></i>
+      </div>
+      <p>Camping</p>
     </div>
-    <p>Camping</p>
-  </div>
-  <div class="filter">
-    <div>
-      <i class="fa-solid fa-cow"></i>
+  </a>
+  <a href="/listings?category=farms">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-cow"></i>
+      </div>
+      <p>Farms</p>
     </div>
-    <p>Farms</p>
-  </div>
-  <div class="filter">
-    <div>
-      <i class="fa-solid fa-snowflake"></i>
+  </a>
+  <a href="/listings?category=arctic">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-snowflake"></i>
+      </div>
+      <p>Arctic</p>
     </div>
-    <p>Arctic</p>
-  </div>
-  <div class="filter">
-    <div>
-      <i class="fa-solid fa-igloo"></i>
+  </a>
+  <a href="/listings?category=domes">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-igloo"></i>
+      </div>
+      <p>Domes</p>
     </div>
-    <p>Domes</p>
-  </div>
-  <div class="filter">
-    <div>
-      <i class="fa-solid fa-ship"></i>
+  </a>
+  <a href="/listings?category=boats">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-ship"></i>
+      </div>
+      <p>Boats</p>
     </div>
-    <p>Boats</p>
-  </div>
+  </a>
   <div class="tax-toggle btn btn-outline-secondary">
     <div class="form-check-reverse form-switch">
       <input
@@ -123,7 +151,11 @@
 </div>
 
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
-  <% for(const listing of listings) { %>
+  <% if(listings.length == 0) { %>
+  <div style="width: 100%; text-align: center" class="alert alert-warning">
+    No Listings were found in this category
+  </div>
+  <% } %> <% for(const listing of listings) { %>
   <a href="/listings/<%= listing._id %>" class="listing-link">
     <div class="card col listing-card">
       <img

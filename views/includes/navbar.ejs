@@ -34,12 +34,13 @@
       aria-controls="navbarNavAltMarkup"
       aria-expanded="false"
       aria-label="Toggle navigation"
+      id="toggle-button"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Explore</a>
+      <div class="navbar-nav home">
+        <a class="nav-link btn btn-light" href="/listings">Explore</a>
       </div>
       <div class="navbar-nav ms-auto">
         <form class="d-flex" role="search">
@@ -55,7 +56,9 @@
         </form>
       </div>
       <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <a class="nav-link create-new btn btn-light" href="/listings/new"
+          >Airbnb your home</a
+        >
         <% if(!currUser) { %>
         <a class="nav-link" href="/signup"><b>Sign up</b></a>
         <a class="nav-link" href="/login"><b>Log in</b></a>
