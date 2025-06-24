@@ -4,12 +4,10 @@ const mapToken = process.env.MAP_TOKEN;
 
 module.exports.index = async (req, res) => {
   const { category } = req.query;
-  let listings;
-  if (category) {
-    listings = await Listing.find({ category: category });
-  } else {
-    listings = await Listing.find({});
-  }
+  const listings = category
+    ? await Listing.find({ category: category })
+    : await Listing.find({});
+
   res.render("listings/index.ejs", { listings });
 };
 

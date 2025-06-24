@@ -103,6 +103,10 @@ body {
   display: flex;
 }
 
+.btns a {
+  width: 4rem !important; 
+}
+
 .show-card {
   padding-left: 0;
   padding-right: 0;

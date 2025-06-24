@@ -6,13 +6,17 @@
   #filters {
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     align-items: center;
+    justify-content: center;
   }
   .filter {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     margin-right: 2rem;
     margin-top: 2rem;
-    opacity: 0.7;
+    opacity: 0.5;
   }
 
   .filter:hover {
@@ -23,7 +27,7 @@
   #filters a {
     color: black;
     text-decoration: none;
-    opacity: 0.7;
+    opacity: 0.5;
   }
 
   .filter p {
@@ -44,97 +48,111 @@
     display: flex;
     align-items: center;
   }
+
+  .underline {
+    border-bottom: 0.25rem solid black;
+    border-radius: 5%;
+    opacity: 1;
+  }
+
+  @media (max-width: 1400px) {
+    .tax-toggle {
+      margin-left: 1.5rem;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    #filters {
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width : 768px) {
+    #filter {
+      justify-content: space-evenly;
+    }
+    .filter {
+      margin-right: 1rem;
+    }
+    .tax-toggle {
+      margin-left: 0;
+    }
+  }
 </style>
 
 <div id="filters">
-  <a href="/listings?category=trending">
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-fire"></i>
-      </div>
-      <p>Trending</p>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-globe"></i>
     </div>
-  </a>
-  <a href="/listings?category=rooms">
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-bed"></i>
-      </div>
-      <p>Rooms</p>
+    <p>All</p>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-fire"></i>
     </div>
-  </a>
-  <a href="/listings?category=iconic cities">
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-mountain-city"></i>
-      </div>
-      <p>Iconic Cities</p>
+    <p>Trending</p>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-bed"></i>
     </div>
-  </a>
-  <a href="/listings?category=mountains">
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-mountain"></i>
-      </div>
-      <p>Mountains</p>
+    <p>Rooms</p>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-mountain-city"></i>
     </div>
-  </a>
-  <a href="/listings?category=castles">
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-school-flag"></i>
-      </div>
-      <p>Castles</p>
+    <p>Iconic Cities</p>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-mountain"></i>
     </div>
-  </a>
-  <a href="/listings?category=amazing pools">
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-person-swimming"></i>
-      </div>
-      <p>Amazing Pools</p>
+    <p>Mountains</p>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-school-flag"></i>
     </div>
-  </a>
-  <a href="/listings?category=camping">
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-campground"></i>
-      </div>
-      <p>Camping</p>
+    <p>Castles</p>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-person-swimming"></i>
     </div>
-  </a>
-  <a href="/listings?category=farms">
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-cow"></i>
-      </div>
-      <p>Farms</p>
+    <p>Amazing Pools</p>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-campground"></i>
     </div>
-  </a>
-  <a href="/listings?category=arctic">
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-snowflake"></i>
-      </div>
-      <p>Arctic</p>
+    <p>Camping</p>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-cow"></i>
     </div>
-  </a>
-  <a href="/listings?category=domes">
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-igloo"></i>
-      </div>
-      <p>Domes</p>
+    <p>Farms</p>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-snowflake"></i>
     </div>
-  </a>
-  <a href="/listings?category=boats">
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-ship"></i>
-      </div>
-      <p>Boats</p>
+    <p>Arctic</p>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-igloo"></i>
     </div>
-  </a>
+    <p>Domes</p>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-ship"></i>
+    </div>
+    <p>Boats</p>
+  </div>
   <div class="tax-toggle btn btn-outline-secondary">
     <div class="form-check-reverse form-switch">
       <input
@@ -150,7 +168,10 @@
   </div>
 </div>
 
-<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+<div
+  class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3"
+  id="listings-container"
+>
   <% if(listings.length == 0) { %>
   <div style="width: 100%; text-align: center" class="alert alert-warning">
     No Listings were found in this category
@@ -169,7 +190,7 @@
         <p class="card-text">
           <b><%= listing.title %></b> <br />
           &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
-          <i class="tax-info"
+          <i class="tax-info tax"
             >&nbsp;&nbsp;+ 18% gst = &#8377; <%= (listing.price + 0.18 *
             listing.price).toLocaleString("en-IN") %> / night</i
           >
@@ -181,11 +202,28 @@
 </div>
 
 <script>
-  const taxSwitch = document.getElementById("switchCheckDefault");
-  const taxInfo = document.querySelectorAll(".tax-info");
-  taxSwitch.addEventListener("click", () => {
-    for (info of taxInfo) {
-      info.classList.toggle("tax-info");
+  const inpSwitch = document.getElementById("switchCheckDefault");
+  const updateTaxDisplay = () => {
+    const taxInfoElements = document.getElementsByClassName("tax");
+    for (const el of taxInfoElements) {
+      if (inpSwitch.checked) {
+        el.classList.remove("tax-info");
+      } else {
+        el.classList.add("tax-info");
+      }
     }
-  });
+  };
+  inpSwitch.addEventListener("click", updateTaxDisplay);
+
+  const filters = document.getElementsByClassName("filter");
+  for (const filter of filters) {
+    filter.addEventListener("click", async () => {
+      const underline = document.getElementsByClassName("underline");
+      const category = filter.children[1].innerHTML.toLowerCase();
+      underline.length > 0 ? underline[0].classList.remove("underline") : 0;
+      filter.classList.add("underline");
+      await filterByCategory(category);
+      updateTaxDisplay();
+    });
+  }
 </script>

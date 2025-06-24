@@ -18,6 +18,7 @@ const dbUrl = process.env.ATLASDB_URL;
 
 const ExpressError = require("./utils/ExpressError.js");
 
+const apiRouter = require("./routes/api.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
@@ -81,6 +82,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/api", apiRouter);
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
@@ -99,13 +101,3 @@ app.use((err, req, res, next) => {
 app.listen(port, (req, res) => {
   console.log(`app is running on port ${port}`);
 });
-
-/* app.get("/demouser", async (req, res) => {
-  const fakeUser = new User({
-    email: "student@gmail.com",
-    username: "delta-student",
-  });
-
-  let registeredUser = await User.register(fakeUser, "helloworld");
-  res.send(registeredUser);
-}); */
