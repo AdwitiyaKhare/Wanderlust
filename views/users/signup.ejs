@@ -1,0 +1,61 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+  <div class="col-6 offset-3">
+    <h1 class="text-center">Signup on Wanderlust</h1>
+    <form method="POST" action="/signup" novalidate class="needs-validation mb-3">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">Looks Good!</div>
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">Looks Good!</div>
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          required
+        />
+      </div>
+      <button class="btn btn-success w-100 mb-3">Signup</button>
+    </form>
+    
+    <hr class="my-4">
+    <!-- Google Sign-In -->
+    <a
+      href="/auth/google"
+      class="d-inline-flex align-items-center justify-content-center bg-blue text-white px-4 py-2 rounded"
+      style="
+        background-color: #4285f4;
+        color: white;
+        text-decoration: none;
+        gap: 8px;
+        width: 100%;
+      "
+    >
+      Signup with Google
+    </a>
+  </div>
+</div>
+
+<style>
+  .bg-blue:hover {
+    background-color: #3367D6 !important;
+    text-decoration: none;
+  }
+</style>
