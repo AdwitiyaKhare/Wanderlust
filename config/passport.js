@@ -4,7 +4,7 @@ const User = require("../models/user.js");
 
 const callbackURL =
   process.env.NODE_ENV === "production"
-    ? "https://your-production-domain.com/auth/google/callback"
+    ? "https://wanderlust-8lw3.onrender.com/auth/google/callback"
     : "http://localhost:8080/auth/google/callback";
 
 passport.use(

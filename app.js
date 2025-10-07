@@ -72,14 +72,15 @@ app.set("trust proxy", 1); // ✅ required for Render
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    store,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    proxy: true,
     cookie: {
-      secure: process.env.NODE_ENV === "production", // true in production, false locally
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      httpOnly: true, // prevents JS access
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // true on Render
+      sameSite: "lax", // same domain, no need for "none"
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     },
   })
 );
