@@ -134,6 +134,10 @@ app.use((err, req, res, next) => {
   console.log(err);
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`app is running on port ${port}`);
