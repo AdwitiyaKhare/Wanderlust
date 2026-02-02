@@ -1,8 +1,8 @@
 <% layout("/layouts/boilerplate") %>
-<!-- <form method="GET" action="/listings/new">
-    <button>Create New Listing</button>
-  </form> -->
+
 <style>
+  /* ================= FILTER BAR ================= */
+
   #filters {
     display: flex;
     flex-direction: row;
@@ -10,19 +10,23 @@
     align-items: center;
     justify-content: center;
   }
+
   .filter {
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-left: 1.375rem;
-    margin-right: 1.375rem;
-    margin-top: 2rem;
+    margin: 2rem 1.375rem 0;
     opacity: 0.5;
+    flex: 0 0 auto;
   }
 
   .filter:hover {
     opacity: 1;
     cursor: pointer;
+  }
+
+  .filter p {
+    font-size: 0.8rem;
   }
 
   #filters a {
@@ -31,9 +35,13 @@
     opacity: 0.5;
   }
 
-  .filter p {
-    font-size: 0.8rem;
+  .underline {
+    border-bottom: 0.25rem solid black;
+    border-radius: 5%;
+    opacity: 1;
   }
+
+  /* ================= TAX TOGGLE ================= */
 
   .tax-info {
     display: none;
@@ -44,17 +52,12 @@
     border-radius: 1rem;
     height: 3rem;
     padding: 1rem;
-    margin-top: 1rem;
-    margin-left: 3rem;
+    margin: 1rem 0 0 3rem;
     display: flex;
     align-items: center;
   }
 
-  .underline {
-    border-bottom: 0.25rem solid black;
-    border-radius: 5%;
-    opacity: 1;
-  }
+  /* ================= LISTING UI ================= */
 
   .listing-card img:hover {
     opacity: 0.8;
@@ -82,16 +85,57 @@
     box-shadow: 0 2px 6px rgba(0, 120, 255, 0.2);
   }
 
-  @media (max-width: 1200px) {
+  /* ================= FILTER SCROLL CONTROLS ================= */
+
+  .filters-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .scroll-btn {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: none;
+    height: 48px;
+    width: 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 20;
+  }
+
+  .scroll-btn:hover {
+    background: #f5f5f5;
+  }
+
+  .scroll-btn.left {
+    left: -20px;
+  }
+
+  .scroll-btn.right {
+    right: -20px;
+  }
+
+  /* ================= RESPONSIVE BREAKPOINTS ================= */
+
+  @media (max-width: 1271px) {
     .filter {
       margin-left: 1.2rem;
       margin-right: 1.2rem;
     }
+  }
+
+  /* Slightly tighter filter spacing */
+  @media (max-width: 1200px) {
+    .filter {
+      margin-left: .9rem;
+      margin-right: .9rem;
+    }
 
     #listings-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem; 
+      gap: 2rem;
     }
 
     .listing-parent {
@@ -100,22 +144,12 @@
     }
   }
 
+  /* Listing grid adjustment */
   @media (max-width: 992px) {
-    .filter {
-      margin-left: 0.75rem;
-      margin-right: 0.75rem;
-    }
-
-    .container {
-      
-    }
     #listings-container {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-    }
-    .listing-card {
-      width: 40rem;
     }
 
     .listing-parent {
@@ -124,59 +158,100 @@
     }
   }
 
-  
+  /* 🔥 Filter horizontal scroll mode */
+  @media (max-width: 1067px) {
+    #filters {
+      justify-content: flex-start;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+
+    #filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scroll-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 700px) {
+      #listings-container {
+        gap: 0.25rem;
+      }
+    }
+
+    @media (max-width: 650px) {
+      #listings-container {
+        gap: 1.5rem;
+      }
+    }
+  }
 </style>
 
-<div id="filters">
-  <div class="filter">
-    <div><i class="fa-solid fa-globe"></i></div>
-    <p>All</p>
+
+<div class="filters-wrapper">
+  <button class="scroll-btn left" onclick="scrollFilters(-1)">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+
+  <div id="filters">
+    <div class="filter">
+      <div><i class="fa-solid fa-globe"></i></div>
+      <p>All</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-fire"></i></div>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-bed"></i></div>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-mountain-city"></i></div>
+      <p>Iconic Cities</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-mountain"></i></div>
+      <p>Mountains</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-school-flag"></i></div>
+      <p>Castles</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-person-swimming"></i></div>
+      <p>Amazing Pools</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-campground"></i></div>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-cow"></i></div>
+      <p>Farms</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-snowflake"></i></div>
+      <p>Arctic</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-igloo"></i></div>
+      <p>Domes</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-ship"></i></div>
+      <p>Boats</p>
+    </div>
   </div>
-  <div class="filter">
-    <div><i class="fa-solid fa-fire"></i></div>
-    <p>Trending</p>
-  </div>
-  <div class="filter">
-    <div><i class="fa-solid fa-bed"></i></div>
-    <p>Rooms</p>
-  </div>
-  <div class="filter">
-    <div><i class="fa-solid fa-mountain-city"></i></div>
-    <p>Iconic Cities</p>
-  </div>
-  <div class="filter">
-    <div><i class="fa-solid fa-mountain"></i></div>
-    <p>Mountains</p>
-  </div>
-  <div class="filter">
-    <div><i class="fa-solid fa-school-flag"></i></div>
-    <p>Castles</p>
-  </div>
-  <div class="filter">
-    <div><i class="fa-solid fa-person-swimming"></i></div>
-    <p>Amazing Pools</p>
-  </div>
-  <div class="filter">
-    <div><i class="fa-solid fa-campground"></i></div>
-    <p>Camping</p>
-  </div>
-  <div class="filter">
-    <div><i class="fa-solid fa-cow"></i></div>
-    <p>Farms</p>
-  </div>
-  <div class="filter">
-    <div><i class="fa-solid fa-snowflake"></i></div>
-    <p>Arctic</p>
-  </div>
-  <div class="filter">
-    <div><i class="fa-solid fa-igloo"></i></div>
-    <p>Domes</p>
-  </div>
-  <div class="filter">
-    <div><i class="fa-solid fa-ship"></i></div>
-    <p>Boats</p>
-  </div>
+
+  <button class="scroll-btn right" onclick="scrollFilters(1)">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
 </div>
+
 
 <div
   class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3"
@@ -247,7 +322,7 @@
     alert("Something went wrong. Please try again.");
   }
 }
-
+  
   // Category filter (unchanged)
   const filters = document.getElementsByClassName("filter");
   for (const filter of filters) {
@@ -257,6 +332,17 @@
       if (underline.length > 0) underline[0].classList.remove("underline");
       filter.classList.add("underline");
       await filterByCategory(category);
+    });
+  }
+</script>
+
+<script>
+  function scrollFilters(direction) {
+    const filters = document.getElementById("filters");
+    const scrollAmount = 200;
+    filters.scrollBy({
+      left: direction * scrollAmount,
+      behavior: "smooth"
     });
   }
 </script>

@@ -41,7 +41,7 @@ async function filterByCategory(category) {
 
     data.listings.forEach((listing) => {
       const html = `
-        <div class="col mb-4">
+        <div class="col mb-4 listing-parent">
           <div class="card listing-card h-100">
             <a href="/listings/${listing._id}" class="listing-link">
               <img
@@ -68,8 +68,8 @@ async function filterByCategory(category) {
               <button
                 class="btn-book-now"
                 onclick="initiatePayment('${listing._id}', ${listing.price}, '${
-        listing.title
-      }')"
+                  listing.title
+                }')"
               >
                 Book Now
               </button>

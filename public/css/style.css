@@ -9,6 +9,12 @@ body {
   min-height: 100vh;
 }
 
+.container {
+    max-width: 90% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
 .navbar {
   height: 5rem;
   background-color: white;
@@ -116,5 +122,5 @@ body {
 
 #map {
   height: 400px;
-  width: 100vh;
+  width: 100%;
 }
